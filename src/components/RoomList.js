@@ -19,6 +19,12 @@ class RoomList extends Component {
     });
   }
 
+  createRoom(rooms) {
+    this.roomsRef.push({
+      name: rooms
+    });
+  }
+
   render() {
     return (
       <section className="roomlist">
@@ -27,6 +33,13 @@ class RoomList extends Component {
             <div className="rooms" key={index}>{room.name}</div>
           )
         }
+        <section id="create-room-container">
+          <form onSubmit={(rooms) => this.createRoom(rooms)}>
+            <input type="text" placeholder="New Room Name"></input>
+            <input type="submit" value="Submit">
+            </input>
+          </form>
+        </section>
       </section>
     );
   }
