@@ -26,12 +26,12 @@ class MessageList extends Component {
 
   render() {
     return (
-      <div className="messagelist-container">
-        <ol>
+      <div className="message-list-container">
+        <ol className="message-list">
           {
             this.state.messages.map((message, index) => {
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-              return <li key={index}>{message.username}: {message.content} - {message.sentAt}</li>;
+              return <li className="message" key={index}>{message.username}: {message.content} - {message.sentAt}</li>;
             } else {
                 return null
               }
