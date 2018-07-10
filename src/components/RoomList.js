@@ -34,20 +34,20 @@ class RoomList extends Component {
 
   render() {
     return (
-      <section className="roomlist">
+      <div className="roomlist-container">
         {
           this.state.rooms.map( (room, index) =>
-            <div className="rooms" key={index}>{room.name}</div>
+            <div className="rooms" key={index} onClick={() => this.props.setActiveRoom(room)}>{room.name}</div>
           )
         }
-        <section id="create-room-container">
+        <div id="create-room-container">
           <form onSubmit={(e) => this.createRoom(e)}>
-            <input type="text" placeholder="New Room Name" onChange={(e) => this.handleChange(e)}></input>
+            <input type="text" placeholder="New Room Name" value={this.state.addRoom} onChange={(e) => this.handleChange(e)}></input>
             <input type="submit" value="Add New Room">
             </input>
           </form>
-        </section>
-      </section>
+        </div>
+      </div>
     );
   }
 }
