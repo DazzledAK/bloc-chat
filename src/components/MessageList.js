@@ -9,11 +9,10 @@ class MessageList extends Component {
       message: {
     username: "",
     content: "",
-    sentAt: "firebase.database.ServerValue.TIMESTAMP",
+    sentAt: "",
     roomId: ""
 }
-    }
-
+  };
     this.messagesRef = this.props.firebase.database().ref('messages');
   }
 
@@ -30,7 +29,13 @@ class MessageList extends Component {
       <div className="messagelist-container">
         <ol>
           {
-            this.state.messages.filter(message => message.roomId === this.props.activeRoom.Id).map((message, index) => <li key={index}>{message.username}: {message.content} - {message.sentAt}</li>)
+            this.state.messages.map((message, index) => {
+              if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
+              return <li key={index}>{message.username}: {message.content} - {message.sentAt}</li>;
+            } else {
+                return null
+              }
+            })
           }
         </ol>
       </div>
