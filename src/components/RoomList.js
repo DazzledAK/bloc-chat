@@ -32,6 +32,10 @@ class RoomList extends Component {
     this.setState({addRoom: e.target.value});
   }
 
+  deleteRoom() {
+    this.roomsRef.child(this.props.activeRoom.key).remove();
+  }
+
   render() {
     return (
       <div className="roomlist-container">
@@ -49,6 +53,7 @@ class RoomList extends Component {
             <input type="submit" value="Create">
             </input>
           </form>
+          <button type="button" onClick={() => this.deleteRoom()}>Delete</button>
         </div>
       </div>
     );
