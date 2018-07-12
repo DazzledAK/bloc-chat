@@ -7,13 +7,11 @@ class MessageList extends Component {
     this.state = {
       messages: [],
       addMessage: "",
-      message: {
         username: "",
         content: "",
         sentAt: "",
         roomId: ""
 }
-  };
     this.messagesRef = this.props.firebase.database().ref('messages');
   }
 
@@ -26,13 +24,13 @@ class MessageList extends Component {
   }
 
   createMessage(e) {
-    e.preventDefault();
-    this.messagesRef.push({
-      username: this.state.username,
-      content: this.state.content,
-      sentAt: this.state.sentAt,
-      roomId: this.state.roomId
-    });
+     e.preventDefault();
+     this.messagesRef.push({
+       username:this.state.username,
+       content:this.state.content,
+       sentAt:this.state.sentAt,
+       roomId:this.state.roomId
+     });
     this.setState({
       username: "",
       content: "",
@@ -41,14 +39,24 @@ class MessageList extends Component {
     });
   }
 
-  handleChange(e) {
-    this.setState({
-      username: "Guest",
-      content: e.target.value,
-      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      roomId: this.props.activeRoom.key
-    });
+  handleChange(e){
+     e.preventDefault();
+     this.setState({
+       username: this.props.user === null ? "Guest" : this.props.user.displayName,
+       content: e.target.value,
+       sentAt: this.timeConverter(this.props.firebase.database.ServerValue.TIMESTAMP),
+       roomId: this.props.activeRoom.key
+      })
   }
+
+  timeConverter(UNIX_timestamp){
+ var a = new Date(UNIX_timestamp*1000);
+     var hour = a.getUTCHours();
+     var min = a.getUTCMinutes();
+     var sec = a.getUTCSeconds();
+     var time = hour+':'+min+':'+sec ;
+     return time;
+ }
 
   render() {
     return (
