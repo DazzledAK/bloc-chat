@@ -50,7 +50,7 @@ class App extends Component {
         <MessageList
           firebase={firebase}
           activeRoom = {this.state.activeRoom}
-          user = {this.props.user}
+          user = {this.state.user}
         />
       </div>
     );
