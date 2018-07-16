@@ -44,7 +44,7 @@ class MessageList extends Component {
      this.setState({
        username: this.props.user === null ? "Guest" : this.props.user.displayName,
        content: e.target.value,
-       sentAt: this.timeConverter(this.props.firebase.database.ServerValue.TIMESTAMP),
+       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
        roomId: this.props.activeRoom.key
       })
   }
@@ -65,7 +65,7 @@ class MessageList extends Component {
           {
             this.state.messages.map((message, index) => {
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-              return <li className="message" key={index}>{message.username}: {message.content}  {message.sentAt}</li>;
+              return <li className="message" key={index}>{message.username}: {message.content}  {this.timeConverter(message.sentAt)}</li>;
             } else {
                 return null
               }
